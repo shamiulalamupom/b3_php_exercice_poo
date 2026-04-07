@@ -16,4 +16,33 @@ enum TaskStatus: string
     case DONE = "terminée";
 }
 
+class Task {
+    protected string $title;
+    protected string $description;
+    protected TaskStatus $status;
+
+    public function __construct(string $title, string $description, TaskStatus $status = TaskStatus::TODO)
+    {
+        $this->title = $title;
+        $this->description = $description;
+        $this->status = $status;
+    }
+
+    public function markAsDone(): void
+    {
+        $this->status = TaskStatus::DONE;
+    }
+
+    public function display(): void
+    {
+        echo "Title: " . $this->title . "\n";
+        echo "Description: " . $this->description . "\n";
+        echo "Status: " . $this->status->value . "\n";
+    }
+}
+
+$task = new Task("Buy groceries", "Milk, Bread, Eggs");
+$task->display();
+$task->markAsDone();
+$task->display();
 
